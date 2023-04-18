@@ -69,6 +69,9 @@ export default function ChartMonth () {
                                 <li>
                                     <NavLink to='/chartmonth'>Thông kê theo tháng </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to='/chartprice'>Thông kê doanh thu trong năm</NavLink>
+                                </li>
                             </ul>
                         </li>
 

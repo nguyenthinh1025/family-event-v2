@@ -22,32 +22,41 @@ export default function EditDrink (props) {
 
 
     const validation = Yup.object({
-        drinkName: Yup.string()
-            .min(2, "Name mininum 2 characters")
-            .max(40, " Name maximum 15 characters")
-            .required("Required!"),
-        drinkQuantity: Yup.number()
-            .min(0)
-            .required("Required!"),
-
-        drinkPrice: Yup.number()
-            .min(0)
-            .required("Required!"),
-        drinkDetail: Yup.string()
-            .min(2, "Detail mininum 2 characters")
-            .required("Required!"),
-        drinkImage: Yup.string()
-            .required("Required!"),
+        foodName: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .max(150, "Tối đa 150 kí tự")
+            .required("Không bỏ trống!"),
+        dish: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .required("Không bỏ trống!"),
+        foodPrice: Yup.number()
+            .min(1, "Giá tiền không bé hơn 1")
+            .required("Không bỏ trống!"),
+        foodDescription: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .required("Không bỏ trống!"),
+        foodIngredient: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .required("Không bỏ trống!"),
+        cookingRecipe: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .required("Không bỏ trống!"),
+        foodImage: Yup.string()
+            .required("Không bỏ trống!"),
     })
 
     const formik = useFormik({
         initialValues: {
-            drinkId: detailDrink?.drinkId,
-            drinkName: detailDrink?.drinkName,
-            drinkQuantity: detailDrink.drinkQuantity,
-            drinkPrice: detailDrink.drinkPrice,
-            drinkDetail: detailDrink.drinkDetail,
-            drinkImage: detailDrink.drinkImage,
+            foodId: detailDrink?.foodId,
+            foodName: detailDrink?.foodName,
+            dish: detailDrink?.dish,
+            foodPrice: detailDrink?.foodPrice,
+            foodDescription: detailDrink?.foodDescription,
+            foodIngredient: detailDrink?.foodIngredient,
+            foodOrigin: detailDrink?.foodOrigin,
+            cookingRecipe: detailDrink?.cookingRecipe,
+            foodImage: detailDrink?.foodImage,
+            foodTypeId: detailDrink?.foodType?.foodTypeId,
             status: true
         },
         enableReinitialize: true,
@@ -86,7 +95,7 @@ export default function EditDrink (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className=' pl-5 pb-5'>
                 <div className='d-flex justify-content-between'>
-                    <div className='d-flex justify-content-between align-items-center' style={{ fontSize: '25px' }}><NavLink to='/drink' style={{ textDecoration: 'none', paddingRight: '10px' }}>Thức Uống</NavLink> / <span style={{ paddingTop: '2px', fontSize: '25px', paddingLeft: '10px', paddingRight: '10px' }}>Chỉnh sửa thức uống</span> / <span style={{ paddingTop: '2px', color: 'red', fontSize: '25px', paddingLeft: '10px' }}>{detailDrink.drinkName}</span></div>
+                    <div className='d-flex justify-content-between align-items-center' style={{ fontSize: '25px' }}><NavLink to='/drink' style={{ textDecoration: 'none', paddingRight: '10px' }}>Thức Uống</NavLink> / <span style={{ paddingTop: '2px', fontSize: '25px', paddingLeft: '10px', paddingRight: '10px' }}>Chỉnh sửa thức uống</span> / <span style={{ paddingTop: '2px', color: 'red', fontSize: '25px', paddingLeft: '10px' }}>{detailDrink.foodName}</span></div>
 
                 </div>
             </div>
@@ -96,51 +105,41 @@ export default function EditDrink (props) {
                         <div className="form-group col">
                             <label className="control-label col-xs-3" htmlFor="inputEmail">Tên Thức Uống:</label>
                             <div className="col-xs-9">
-                                <input name="drinkName" className="form-control" id="inputEmail" value={formik.values.drinkName} onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.drinkName}</p>
+                                <input name="foodName" className="form-control" id="inputEmail" value={formik.values.foodName} onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.foodName}</p>
                             </div>
                         </div>
-                        <div className="form-group col">
-                            <label className="control-label col-xs-3" htmlFor="inputPassword">Số Lượng:</label>
-                            <div className="col-xs-9">
-                                <input type="number" className="form-control" id="inputPassword" name="drinkQuantity" value={formik.values.drinkQuantity} onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.drinkQuantity}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row'>
-
                         <div className="form-group col">
                             <label className="control-label col-xs-3" htmlFor="inputPassword">Giá Tiền:</label>
                             <div className="col-xs-9">
-                                <input type="number" className="form-control" id="inputPassword" name="drinkPrice" value={formik.values.drinkPrice} onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.drinkPrice}</p>
+                                <input type="number" className="form-control" id="inputPassword" name="foodPrice" value={formik.values.foodPrice} onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.foodPrice}</p>
                             </div>
                         </div>
                     </div>
+
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
                         <div className="col-xs-9">
-                            <textarea rows={3} name="drinkDetail" className="form-control" id="postalAddress" defaultValue={""} value={formik.values.drinkDetail} onChange={formik.handleChange} />
-                            <p className='text-danger'>{formik.errors.drinkDetail}</p>
+                            <textarea rows={3} name="foodDescription" className="form-control" id="postalAddress" defaultValue={""} value={formik.values.foodDescription} onChange={formik.handleChange} />
+                            <p className='text-danger'>{formik.errors.foodDescription}</p>
                         </div>
                     </div>
-
 
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
-                        <div>
-                            <img src={formik.values.drinkImage} width={300} height={300} />
+                        <div style={{ marginBottom: '30px' }}>
+                            <img src={formik.values.foodImage} width={300} height={300} />
                         </div>
-                        <input type="file" name="drinkImage" id="file" className="input-file" onChange={uploadFile} />
+                        <input type="file" name="foodImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">
                             <FontAwesomeIcon icon={faUpload} />
-                            <span className="js-fileName pl-2 pt-2">Choose a file</span>
+                            <span className="js-fileName">Choose a file</span>
                         </label>
+                        <p className='text-danger'>{formik.errors.foodImage}</p>
                     </div>
-
 
 
 
@@ -148,7 +147,7 @@ export default function EditDrink (props) {
                     <div className="form-group">
                         <div className="col-xs-offset-3 col-xs-9">
                             <input type="submit" className="btn btn-primary" defaultValue="Submit" value="Chỉnh Sửa" />
-                            {/* <input type="reset" className="btn btn-default" defaultValue="Reset" /> */}
+
                         </div>
                     </div>
                 </form>

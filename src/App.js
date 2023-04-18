@@ -61,6 +61,15 @@ import EditEvent from './pages/Event/EditEvent';
 import Register from './pages/Register/Register';
 import Admin from './pages/Admin/Admin';
 import AddStaff from './pages/Admin/AddStaff';
+import UpdateEntertainment from './pages/Entertainment/UpdateEntertainment';
+import ViewDecor from './pages/Decor/ViewDecor';
+import AddEntertainmentProduct from './pages/EntertainmentProduct/AddEntertainmentProduct';
+import ChartPrice from './pages/Dashboard/ChartPrice';
+import Schedule from './pages/Dashboard/Schedule';
+import ViewMenu from './pages/Menu/ViewMenu';
+import AddMenuList from './pages/Menu/AddMenuList';
+import AddDecorProduct from './pages/Decor/AddDecorProduct';
+import ListMenu from './pages/Menu/ListMenu';
 export const history = createBrowserHistory();
 
 function App () {
@@ -96,9 +105,13 @@ function App () {
           <AdminTemplate path='/menu' exact Component={Menu} />
           <AdminTemplate path='/editmenu/:id' exact Component={EditMenu} />
           <AdminTemplate path='/addmenu' exact Component={AddMenu} />
+          <AdminTemplate path='/viewmenu/:id' exact Component={ViewMenu} />
+          <AdminTemplate path='/addmenulist' exact Component={AddMenuList} />
           <AdminTemplate path='/menuproduct' exact Component={MenuProduct} />
+          <AdminTemplate path='/listmenu' exact Component={ListMenu} />
           <AdminTemplate path='/decorproduct' exact Component={DecorProduct} />
-          <AdminTemplate path='/editdecorproduct/:id' exact Component={EditDecorProduct} />
+          <AdminTemplate path='/adddecorproduct/:id' exact Component={AddDecorProduct} />
+          <AdminTemplate path='/editdecorproduct/:id/:id1' exact Component={EditDecorProduct} />
           <AdminTemplate path='/room' exact Component={Room} />
           <AdminTemplate path='/addroom' exact Component={AddRoom} />
           <AdminTemplate path='/editroom/:id' exact Component={EditRoom} />
@@ -114,8 +127,10 @@ function App () {
           <AdminTemplate path='/addentertainment' exact Component={AddEntertainerment} />
           <AdminTemplate path='/entertainmentproduct' exact Component={EntertainmentProduct} />
           <AdminTemplate path='/editentertainmentproduct/:id' exact Component={EditEntertainmentProduct} />
+          <AdminTemplate path='/addentertainmentproduct/:id' exact Component={AddEntertainmentProduct} />
           <AdminTemplate path='/event' exact Component={Event} />
           <AdminTemplate path='/chartyear' exact Component={LineChart} />
+          <AdminTemplate path='/chartprice' exact Component={ChartPrice} />
           <AdminTemplate path='/chartquy' exact Component={Chart1} />
           <AdminTemplate path='/chartmonth' exact Component={ChartMonth} />
           <AdminTemplate path='/script' exact Component={Script} />
@@ -125,6 +140,9 @@ function App () {
           <AdminTemplate path='/editevent/:id' exact Component={EditEvent} />
           <AdminTemplate path='/admin' exact Component={Admin} />
           <AdminTemplate path='/addstaff' exact Component={AddStaff} />
+          <AdminTemplate path='/updateentertainment/:id/:id1' exact Component={UpdateEntertainment} />
+          <AdminTemplate path='/viewdecor/:id' exact Component={ViewDecor} />
+          <AdminTemplate path='/schedule' exact Component={Schedule} />
           <Route path='/login' exact component={Login} />
           <Route path='/register' exact component={Register} />
 

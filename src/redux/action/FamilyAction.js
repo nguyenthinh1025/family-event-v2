@@ -46,9 +46,25 @@ export const UpdateFamilyAction = (id) => {
 
 
 export const AddFamilyAction = (id) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         try {
             let result = await http.post(`/Family/inser-family-member`, id);
+            // console.log(result.data.data);
+            console.log(getState().EventBookerReducer?.arrEventBookerById?.eventBookerId);
+            const action = await GetFamilyAction()
+            await dispatch(action)
+            history.push('/eventbooker')
+            // history.push(`/editeventbooker/${getState().EventBookerReducer?.arrEventBookerById?.eventBookerId}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const DeleteFamilyAction = (id) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.delete(`/Family/inser-family-member`, id);
             console.log(result.data.data);
             console.log(result);
             const action = GetFamilyAction()

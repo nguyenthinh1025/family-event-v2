@@ -34,7 +34,7 @@ export default function Drink () {
             return arrDrink.slice((current - 1) * pageSize, current * pageSize)
         }
         else {
-            return arrDrink.filter(item => item.drinkName.toLowerCase().includes(search.toLowerCase().trim()))
+            return arrDrink.filter(item => item.foodName.toLowerCase().includes(search.toLowerCase().trim()))
         }
     };
 
@@ -100,7 +100,7 @@ export default function Drink () {
                                                 <th>Tên Nước</th>
                                                 <th>Giá Tiền</th>
                                                 <th>Hình Ảnh</th>
-                                                <th>Số Lượng</th>
+                                                {/* <th>Số Lượng</th> */}
                                                 <th className='pr-4' style={{ position: 'relative' }} ><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>
@@ -110,17 +110,17 @@ export default function Drink () {
                                                     return (
                                                         <tr key={index}>
                                                             <td>{++index}</td>
-                                                            <td>{data.drinkName}</td>
-                                                            <td>{data.drinkPrice.toLocaleString()} vnđ</td>
-                                                            <td><img src={data.drinkImage} className="rounded " width={100} height={100} alt="hình thức uống" /></td>
-                                                            <td>{data.drinkQuantity} (thùng)</td>
+                                                            <td>{data.foodName}</td>
+                                                            <td>{data.foodPrice.toLocaleString()} vnđ</td>
+                                                            <td><img src={data.foodImage} className="rounded " width={100} height={100} alt="hình thức uống" /></td>
+                                                            {/* <td>{data.drinkQuantity} (thùng)</td> */}
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>
-                                                                    <NavLink to={`/editdrink/${data.drinkId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
+                                                                    <NavLink to={`/editdrink/${data.foodId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
                                                                     <div style={{ cursor: 'pointer' }} onClick={async () => {
-                                                                        const action = await DeleteDrinkAction(data.drinkId)
+                                                                        const action = await DeleteDrinkAction(data.foodId)
                                                                         await dispatch(action)
-                                                                        toast.error(`Xóa thức uống ${data.drinkName} thành công`, {
+                                                                        toast.error(`Xóa thức uống ${data.foodName} thành công`, {
                                                                             position: toast.POSITION.TOP_RIGHT
                                                                         });
                                                                     }}><img src='./../../images/delete.svg' width={30} /></div>

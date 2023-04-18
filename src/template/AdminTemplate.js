@@ -76,12 +76,12 @@ export const AdminTemplate = (props) => {
 
                                                         {localStorage.getItem('admin') !== "admin" ? <div> <button type="button" tabIndex={0} className="dropdown-item">Trang Cá Nhân</button></div> : <div></div>}
                                                         <div tabIndex={-1} className="dropdown-divider" />
-                                                        <button type="button" tabIndex={0} className="dropdown-item" onClick={async () => {
+                                                        <NavLink to='/login' tabIndex={0} className="dropdown-item" onClick={async () => {
                                                             await dispatch({
                                                                 type: "LOGOUT"
                                                             })
-                                                            history.push('/login')
-                                                        }}>Đăng Xuất</button>
+                                                            // history.push('/login')
+                                                        }}>Đăng Xuất</NavLink>
                                                     </div>
                                                 </div>
                                             </div>
@@ -429,196 +429,191 @@ export const AdminTemplate = (props) => {
                                             </div>
                                             : <div></div>
                                         }
-                                        <li className="app-sidebar__heading">Trang Điều Khiển</li>
-                                        <li>
-                                            <NavLink to='/' className="mm-active" style={{ textDecoration: 'none' }}>
-                                                <FontAwesomeIcon icon={faLineChart} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '10px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-rocket" /> */}
-                                                Thống Kê
-                                            </NavLink>
-                                        </li>
-                                        <li className="app-sidebar__heading">Đồ Ăn và Thức Uống</li>
-                                        <li>
-                                            <NavLink to='/food'>
-                                                <FontAwesomeIcon icon={faBowlFood} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '10px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
-                                                Đồ Ăn
-                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
-                                            </NavLink>
-                                            <ul>
-                                                <li>
-                                                    <NavLink to='/food'>
-                                                        <i className="metismenu-icon" />
-                                                        Đồ Ăn
-                                                    </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/foodtype'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Loại Đồ Ăn
-                                                    </NavLink>
-                                                </li>
+                                        {localStorage.getItem('admin') === 'staff' ? <Fragment>
+                                            <li className="app-sidebar__heading">Trang Điều Khiển</li>
+                                            <li>
+                                                <NavLink to='/' className="mm-active" style={{ textDecoration: 'none' }}>
+                                                    <FontAwesomeIcon icon={faLineChart} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '10px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-rocket" /> */}
+                                                    Thống Kê
+                                                </NavLink>
+                                            </li>
+                                            <li className="app-sidebar__heading">Đồ Ăn và Thức Uống</li>
+                                            <li>
+                                                <NavLink to='/menu' onClick={() => { history.push('/menu') }}>
+                                                    <FontAwesomeIcon icon={faList} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
 
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <NavLink to='/drink'>
-                                                <FontAwesomeIcon icon={faBottleWater} className="fa-thin fa-mug-hot metismenu-icon" style={{ position: 'absolute', left: '10px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
-                                                Thức Uống
-                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
-                                            </NavLink>
-                                            <ul>
-                                                <li>
-                                                    <NavLink to='/drink'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Thức Uống
-                                                    </NavLink>
-                                                </li>
+                                                    Menu
 
-                                            </ul>
-                                        </li>
+                                                </NavLink>
 
-                                        <li className="app-sidebar__heading">Giải Trí</li>
-                                        <li>
-                                            <NavLink to='/game'>
-                                                <FontAwesomeIcon icon={faGamepad} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
-                                                Giải Trí
-                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
-                                            </NavLink>
-                                            <ul>
-                                                <li>
-                                                    <NavLink to='/entertainment'>
-                                                        <i className="metismenu-icon" />
-                                                        Giải Trí
-                                                    </NavLink>
-                                                </li>
-                                                <li>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/food'>
+
+                                                    <FontAwesomeIcon icon={faBowlFood} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '8px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                    Đồ Ăn
+                                                    <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
+                                                </NavLink>
+                                                <ul>
+                                                    <li>
+                                                        <NavLink to='/food'>
+                                                            <i className="metismenu-icon" />
+                                                            Đồ Ăn
+                                                        </NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to='/foodtype'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Loại Đồ Ăn
+                                                        </NavLink>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <NavLink to='/drink'>
+                                                    <FontAwesomeIcon icon={faBottleWater} className="fa-thin fa-mug-hot metismenu-icon" style={{ position: 'absolute', left: '10px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                    Thức Uống
+                                                    <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
+                                                </NavLink>
+                                                <ul>
+                                                    <li>
+                                                        <NavLink to='/drink'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Thức Uống
+                                                        </NavLink>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+
+                                            <li className="app-sidebar__heading">Giải Trí</li>
+                                            <li>
+                                                <NavLink to='/game'>
+                                                    <FontAwesomeIcon icon={faGamepad} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                    Giải Trí
+                                                    <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
+                                                </NavLink>
+                                                <ul>
+                                                    <li>
+                                                        <NavLink to='/entertainment'>
+                                                            <i className="metismenu-icon" />
+                                                            Giải Trí
+                                                        </NavLink>
+                                                    </li>
+                                                    {/* <li>
                                                     <NavLink to='/entertainmentproduct'>
                                                         <i className="metismenu-icon" />
                                                         Giải Trí Theo Loại
                                                     </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/game'>
-                                                        <i className="metismenu-icon" />
-                                                        Trò Chơi
-                                                    </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/show'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Tiết Mục
-                                                    </NavLink>
-                                                </li>
+                                                </li> */}
+                                                    <li>
+                                                        <NavLink to='/game'>
+                                                            <i className="metismenu-icon" />
+                                                            Trò Chơi
+                                                        </NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to='/show'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Tiết Mục
+                                                        </NavLink>
+                                                    </li>
 
-                                            </ul>
-                                        </li>
-                                        <li className="app-sidebar__heading">Trang Trí</li>
-                                        <li>
-                                            <NavLink to='/decor'>
-                                                <FontAwesomeIcon icon={faShop} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
-                                                Trang Trí
-                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
-                                            </NavLink>
-                                            <ul>
-                                                <li>
-                                                    <NavLink to='/decor'>
-                                                        <i className="metismenu-icon" />
-                                                        Trang Trí
-                                                    </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/product'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Dụng Cụ
-                                                    </NavLink>
-                                                </li>
-                                                <li>
+                                                </ul>
+                                            </li>
+                                            <li className="app-sidebar__heading">Trang Trí</li>
+                                            <li>
+                                                <NavLink to='/decor'>
+                                                    <FontAwesomeIcon icon={faShop} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                    Trang Trí
+                                                    <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
+                                                </NavLink>
+                                                <ul>
+                                                    <li>
+                                                        <NavLink to='/decor'>
+                                                            <i className="metismenu-icon" />
+                                                            Trang Trí
+                                                        </NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to='/product'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Dụng Cụ
+                                                        </NavLink>
+                                                    </li>
+                                                    {/* <li>
                                                     <NavLink to='/decorproduct'>
                                                         <i className="metismenu-icon">
                                                         </i>Dụng Cụ Trang Trí
                                                     </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/room'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Nơi Diễn Ra
-                                                    </NavLink>
-                                                </li>
+                                                </li> */}
+                                                    <li>
+                                                        <NavLink to='/room'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Nơi Diễn Ra
+                                                        </NavLink>
+                                                    </li>
 
-                                            </ul>
-                                        </li>
-                                        <li className="app-sidebar__heading">Menu</li>
-                                        <li>
-                                            <NavLink to='/menu'>
-                                                <FontAwesomeIcon icon={faList} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                </ul>
+                                            </li>
 
-                                                Menu
-                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
-                                            </NavLink>
-                                            <ul>
+                                            <li className="app-sidebar__heading">Sự Kiện</li>
+                                            <li>
+                                                <NavLink to='/decor'>
+                                                    <FontAwesomeIcon icon={faBaby} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
 
-                                                <li>
-                                                    <NavLink to='/menu'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Menu
-                                                    </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/menuproduct'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Menu Sản Phẩm
-                                                    </NavLink>
-                                                </li>
+                                                    Sự Kiện
+                                                    <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
+                                                </NavLink>
+                                                <ul>
 
-                                            </ul>
-                                        </li>
-                                        <li className="app-sidebar__heading">Sự Kiện</li>
-                                        <li>
-                                            <NavLink to='/decor'>
-                                                <FontAwesomeIcon icon={faBaby} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                    <li>
+                                                        <NavLink to='/event'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Sự Kiện
+                                                        </NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to='/eventtype'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Loại Sự Kiện
+                                                        </NavLink>
+                                                    </li>
+                                                    <li>
+                                                        <NavLink to='/script'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Kịch Bản
+                                                        </NavLink>
+                                                    </li>
+                                                    {/* <li>
+                                                        <NavLink to='/room'>
+                                                            <i className="metismenu-icon">
+                                                            </i>Địa Điểm
+                                                        </NavLink>
+                                                    </li> */}
 
-                                                Sự Kiện
-                                                <i className="metismenu-state-icon pe-7s-angle-down caret-left" />
-                                            </NavLink>
-                                            <ul>
+                                                </ul>
+                                            </li>
+                                            <li className="app-sidebar__heading">Người Dùng</li>
+                                            <li>
+                                                <NavLink to='/eventbooker'>
+                                                    <FontAwesomeIcon icon={faUser} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
+                                                    {/* <i className="metismenu-icon pe-7s-diamond" /> */}
 
-                                                <li>
-                                                    <NavLink to='/event'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Sự Kiện
-                                                    </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/eventtype'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Loại Sự Kiện
-                                                    </NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to='/script'>
-                                                        <i className="metismenu-icon">
-                                                        </i>Kịch Bản
-                                                    </NavLink>
-                                                </li>
+                                                    Người Dùng
 
-                                            </ul>
-                                        </li>
-                                        <li className="app-sidebar__heading">Người Dùng</li>
-                                        <li>
-                                            <NavLink to='/eventbooker'>
-                                                <FontAwesomeIcon icon={faUser} className="fa-thin fa-pot-food metismenu-icon" style={{ position: 'absolute', left: '5px', top: '11px' }} />
-                                                {/* <i className="metismenu-icon pe-7s-diamond" /> */}
+                                                </NavLink>
+                                            </li>
 
-                                                Người Dùng
-
-                                            </NavLink>
-                                        </li>
+                                        </Fragment> : <div></div>}
 
 
                                     </ul>

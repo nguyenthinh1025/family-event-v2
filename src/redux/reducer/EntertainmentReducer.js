@@ -1,7 +1,7 @@
 const stateDefault = {
     arrEntertainment: [],
     arrEntertainmentById: [],
-
+    arrEntertainmentProduct: {}
 }
 
 
@@ -14,6 +14,10 @@ export const EntertainmentReducer = (state = stateDefault, action) => {
         }
         case 'GET_LIST_ENTERTAINMENT_ID': {
             state.arrEntertainmentById = action.arrEntertainmentById;
+            return { ...state }
+        }
+        case 'GET_LIST_ENTERTAINMENT_ID2': {
+            state.arrEntertainmentProduct = action.arrEntertainmentProduct;
             return { ...state }
         }
 

@@ -20,15 +20,17 @@ export default function AddProduct (props) {
     const validation = Yup.object({
         decorationProductName: Yup.string()
             .required("Không bỏ trống!"),
-        productQuantity: Yup.string()
-            .required("Không bỏ trống!"),
         productDetails: Yup.string()
             .required("Không bỏ trống!"),
         productSupplier: Yup.string()
             .required("Không bỏ trống!"),
         productImage: Yup.string()
             .required("Không bỏ trống!"),
-        productImage: Yup.string()
+        productPrice: Yup.number()
+            .min(1, "Giá tiền không bé hơn 1")
+            .required("Không bỏ trống!"),
+        productPrice: Yup.number()
+            .min(1, "Số Lượng không bé hơn 1")
             .required("Không bỏ trống!"),
     })
 
@@ -79,7 +81,7 @@ export default function AddProduct (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='' style={{ fontSize: '25px' }}><NavLink to='/food'>Dụng Cụ</NavLink> / <span>Thêm mới dụng cụ</span> </div>
+                    <div className='d-flex justify-content-between align-items-center' style={{ fontSize: '25px' }}><NavLink to='/product' style={{ textDecoration: 'none', paddingRight: '10px' }}>Dụng Cụ</NavLink> / <span style={{ paddingTop: '2px', fontSize: '25px', paddingLeft: '10px', paddingRight: '10px' }}>Thêm mới dụng cụ </span></div>
 
                 </div>
             </div>
@@ -97,7 +99,16 @@ export default function AddProduct (props) {
                             <label className="control-label col-xs-3" htmlFor="inputEmail">Số Lượng:</label>
                             <div className="col-xs-9">
                                 <input name="productQuantity" type='number' className="form-control" id="inputEmail" onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.productQuantity}</p>
+                                <p className='text-danger'>{formik.errors.productPrice}</p>
+
+                            </div>
+                        </div>
+                        <div className="form-group col">
+                            <label className="control-label col-xs-3" htmlFor="inputEmail">Giá Tiền:</label>
+                            <div className="col-xs-9">
+                                <input name="productPrice" type='number' className="form-control" id="inputEmail" onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.productPrice}</p>
+
                             </div>
                         </div>
                     </div>
@@ -117,8 +128,11 @@ export default function AddProduct (props) {
                     </div>
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
-                        <div>
+                        {/* <div>
                             <img src={formik.values.productImage} width={300} height={300} />
+                        </div> */}
+                        <div style={{ marginBottom: '30px' }}>
+                            {formik.values.productImage === '' ? <div></div> : <div><img src={formik.values.productImage} width={300} height={200} /></div>}
                         </div>
                         <input type="file" name="productImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">
@@ -134,8 +148,8 @@ export default function AddProduct (props) {
                     <br />
                     <div className="form-group">
                         <div className="col-xs-offset-3 col-xs-9">
-                            <input type="submit" className="btn btn-primary" defaultValue="Submit" />
-                            <input type="reset" className="btn btn-default" defaultValue="Reset" />
+                            <input type="submit" className="btn btn-primary" defaultValue="Submit" value="Thêm mới" />
+                            {/* <input type="reset" className="btn btn-default" defaultValue="Reset" /> */}
                         </div>
                     </div>
                 </form>

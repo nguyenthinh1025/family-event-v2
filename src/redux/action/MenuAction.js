@@ -42,6 +42,29 @@ export const GetListMenuByIdAction = (id) => {
     }
 }
 
+export const GetListMenuByProductIdAction = (id) => {
+    return async (dispatch) => {
+        try {
+            const action3 = {
+                type: "DISPLAY_LOADING"
+            }
+            dispatch(action3)
+            let result = await http.get(`/MenuProduct/get-menu-product-by-id?menuProductId=${id}`);
+            const action = {
+                type: "GET_LIT_MENU_BYID_PRODUCT",
+                arrMenuByProductId: result.data.data
+            }
+            dispatch(action)
+            const action4 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action4)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 
 export const UpdateMenuAction = (value) => {
     return async (dispatch) => {
@@ -80,6 +103,21 @@ export const DeleteMenuAction = (id) => {
             const action = await GetListMenuAction()
             await dispatch(action)
             console.log(result.data.data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export const AddMenuListAction = (id) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.post(`/Menu/insert-menu-list`, id);
+            const action = await GetListMenuAction()
+            await dispatch(action)
+            history.push('/menu')
 
         } catch (error) {
             console.log(error);

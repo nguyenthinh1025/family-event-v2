@@ -136,7 +136,7 @@ export default function EntertainmentProduct () {
                                                                 </div>
                                                             })}</td>
                                                             <td>{data.quantity}</td>
-                                                            <td>{data.entertainmentId}</td>
+                                                            <td>{data.entertainmentProductPrice.toLocaleString()} vnđ</td>
 
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>

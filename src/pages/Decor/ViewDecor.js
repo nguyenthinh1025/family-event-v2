@@ -5,24 +5,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { DeleteGameAction, GetGameAction } from '../../redux/action/GameAction';
-import { DeleteShowAction, GetShowAction } from '../../redux/action/ShowAction';
-export default function Show () {
+import { DeleteDecorAction, GetDecorAction, GetDecorProductByIdAction } from '../../redux/action/DecorAction';
+import { DeleteProductByDecorIdAction, GetDecorationProductAction } from '../../redux/action/DecorationProductAction';
+import { history } from '../../App';
+export default function ViewDecor (props) {
+    const { id } = props.match.params;
+
     const dispatch = useDispatch();
     useEffect(() => {
-        const action = GetShowAction();
+        const action = GetDecorProductByIdAction(id);
         dispatch(action)
 
     }, []);
-    const { arrShow } = useSelector(root => root.ShowReducer);
-    console.log(arrShow);
-    const [perPage, setPerPage] = useState(5);
+
+    const { getDecorProuctByID } = useSelector(root => root.DecorReducer);
+    console.log(getDecorProuctByID);
+    const [perPage, setPerPage] = useState(10);
     const [size, setSize] = useState(perPage);
     const [current, setCurrent] = useState(1);
     const [search, setSearch] = useState('');
     const PerPageChange = (value) => {
         setSize(value);
-        const newPerPage = Math.ceil(arrShow.length / value);
+        const newPerPage = Math.ceil(getDecorProuctByID.length / value);
         if (current > newPerPage) {
             setCurrent(newPerPage);
         }
@@ -30,12 +34,12 @@ export default function Show () {
 
     const getData = (current, pageSize) => {
         // Normally you should get the data from the server
-        // return arrShow.slice((current - 1) * pageSize, current * pageSize)
+        // return getDecorProuctByID.slice((current - 1) * pageSize, current * pageSize)
         if (search === "") {
-            return arrShow.slice((current - 1) * pageSize, current * pageSize)
+            return getDecorProuctByID.slice((current - 1) * pageSize, current * pageSize)
         }
         else {
-            return arrShow.filter(item => item.showServiceName.toLowerCase().includes(search.toLowerCase().trim()))
+            return getDecorProuctByID.filter(item => item.decoration?.decorationName.toLowerCase().includes(search.toLowerCase().trim()))
         }
     };
 
@@ -57,13 +61,15 @@ export default function Show () {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='container display-6 fw-bold title'>Danh Sách Chương Trình</div>
-                    {/* <NavLink to='/addshow'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
-                    <NavLink className='test' to='/addshow'>
+                    <div className='container  fw-bold  d-flex  items-center' style={{ fontSize: '25px' }}><span className='title' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => { history.push('/decor') }}>Trang Trí /</span> <span style={{ fontSize: '30px', paddingLeft: '10px' }}>Danh Sách Dụng Cụ Trang Trí</span></div>
+                    <div className='test' onClick={() => {
+                        history.push(`/adddecorproduct/${id}`)
+                    }}>
                         <div className="primary-button">
                             <div className="custom-button">Thêm Mới</div>
                         </div>
-                    </NavLink>
+                    </div>
+
                 </div>
             </div>
             <div className="container-fluid mt-2 mb-2" >
@@ -84,7 +90,7 @@ export default function Show () {
                                             className="pagination-data"
                                             showTotal={(total, range) => `Showing ${range[0]}-${range[1]} of ${total}`}
                                             onChange={PaginationChange}
-                                            total={arrShow.length}
+                                            total={getDecorProuctByID?.length}
                                             current={current}
                                             pageSize={size}
                                             showSizeChanger={false}
@@ -98,9 +104,10 @@ export default function Show () {
                                         <thead className="thead-primary table-sorting">
                                             <tr>
                                                 <th className='ml-4'>Số Thứ Tự</th>
-                                                <th>Tên Chương Trình</th>
+                                                <th>Tên Dụng Cụ Trang Trí</th>
                                                 <th>Giá Tiền</th>
-                                                <th>Người Diễn</th>
+                                                <th>Tên Đạo Cụ</th>
+                                                <th>Chi Tiết</th>
                                                 <th>Hình Ảnh</th>
                                                 <th style={{ position: 'relative' }}><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
@@ -111,21 +118,24 @@ export default function Show () {
                                                     return (
                                                         <tr key={index}>
                                                             <td>{++index}</td>
-                                                            <td>{data.showServiceName}</td>
-                                                            <td>{data.showPrice.toLocaleString()} vnđ</td>
-                                                            <td>{data.singer}</td>
-                                                            <td><img src={data.showImage} className="rounded " width={100} height={100} alt="hình chương trình" /></td>
+                                                            <td>{data.decoration?.decorationName}</td>
+                                                            <td>{data.price.toLocaleString()} vnđ</td>
+                                                            <td>{data.product?.decorationProductName}</td>
+                                                            <td>{data.product?.productDetails}</td>
+                                                            <td><img src={data.decoration?.decorationImage} className="rounded " width={100} height={100} alt="hình dụng cụ trang trí trang trí" /></td>
 
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>
-                                                                    <NavLink to={`/editshow/${data.showId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
-                                                                    <div style={{ cursor: 'pointer' }} onClick={async () => {
-                                                                        const action = await DeleteShowAction(data.showId)
+                                                                    <NavLink to={`/editdecorproduct/${data.decorationId}/${data.product?.productId}`} style={{ cursor: 'pointer' }} onClick={() => {
+                                                                        console.log(data.product?.productId);
+                                                                    }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
+                                                                    {/* <div style={{ cursor: 'pointer' }} onClick={async () => {
+                                                                        const action = await DeleteProductByDecorIdAction(data.product?.productId)
                                                                         await dispatch(action)
-                                                                        toast.error(`Xóa tiết mục ${data.showServiceName} thành công`, {
+                                                                        toast.error(`Xóa dụng cụ thành công`, {
                                                                             position: toast.POSITION.TOP_RIGHT
                                                                         });
-                                                                    }}><img src='./../../images/delete.svg' width={30} /></div>
+                                                                    }}><img src='./../../images/delete.svg' width={30} /></div> */}
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -141,7 +151,7 @@ export default function Show () {
                                         className="pagination-data"
                                         showTotal={(total, range) => `Showing ${range[0]}-${range[1]} of ${total}`}
                                         onChange={PaginationChange}
-                                        total={arrShow.length}
+                                        total={getDecorProuctByID?.length}
                                         current={current}
                                         pageSize={size}
                                         showSizeChanger={false}

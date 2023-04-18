@@ -38,7 +38,7 @@ export default function EditFooodType (props) {
         validationSchema: validation,
         onSubmit: async (value) => {
             await console.log(value);
-            const action = await UpdateFoodTypeAction(formik.values.foodTypeId, value);
+            const action = await UpdateFoodTypeAction(value);
             await dispatch(action)
             toast(`Cập nhật ${value.foodTypeName} thành công`, {
                 position: toast.POSITION.TOP_RIGHT
@@ -71,11 +71,16 @@ export default function EditFooodType (props) {
                     </div>
 
 
-                    <div className="form-group">
-                        <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
-                        <div className="col-xs-9">
-                            <textarea rows={3} name="foodTypeDetail" className="form-control" id="postalAddress" defaultValue={""} value={formik.values.foodTypeDetail} onChange={formik.handleChange} />
-                            <p className='text-danger'>{formik.errors.foodTypeDetail}</p>
+                    <div className='row'>
+                        <div className="form-group col">
+                            <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
+                            <div className="col-xs-9">
+                                <textarea rows={3} name="foodTypeDetail" className="form-control" id="postalAddress" defaultValue={""} value={formik.values.foodTypeDetail} onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.foodTypeDetail}</p>
+                            </div>
+                        </div>
+                        <div className="form-group col">
+
                         </div>
                     </div>
 

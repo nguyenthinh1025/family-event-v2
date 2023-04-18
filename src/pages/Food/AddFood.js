@@ -27,20 +27,25 @@ export default function AddFood (props) {
 
     const validation = Yup.object({
         foodName: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .max(150, "Tối đa 150 kí tự")
             .required("Không bỏ trống!"),
         dish: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
             .required("Không bỏ trống!"),
         foodPrice: Yup.number()
+            .min(1, "Giá tiền không bé hơn 1")
             .required("Không bỏ trống!"),
         foodDescription: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
             .required("Không bỏ trống!"),
         foodIngredient: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
             .required("Không bỏ trống!"),
         cookingRecipe: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
             .required("Không bỏ trống!"),
         foodImage: Yup.string()
-            .required("Không bỏ trống!"),
-        foodTypeId: Yup.string()
             .required("Không bỏ trống!"),
     })
 
@@ -53,7 +58,7 @@ export default function AddFood (props) {
             foodDescription: "",
             foodIngredient: "",
             foodOrigin: "",
-            cookingRecipe: "",
+            cookingRecipe: "string",
             foodImage: "",
             foodTypeId: "",
             status: true
@@ -64,7 +69,7 @@ export default function AddFood (props) {
             console.log(value);
             const action = await AddFoodAction(value);
             await dispatch(action)
-            toast(`Thêm mới đồ ăn ${value.foodName} thành công`, {
+            toast(`Thêm mới  ${value.foodName} thành công`, {
                 position: toast.POSITION.TOP_RIGHT
             });
 
@@ -109,7 +114,7 @@ export default function AddFood (props) {
                             </div>
                         </div>
                         <div className="form-group col">
-                            <label className="control-label col-xs-3" htmlFor="inputPassword">Món Ăn:</label>
+                            <label className="control-label col-xs-3" htmlFor="inputPassword">Chế Biến:</label>
                             <div className="col-xs-9">
                                 <input type="" className="form-control" id="inputPassword" name="dish" onChange={formik.handleChange} />
                                 <p className='text-danger'>{formik.errors.dish}</p>
@@ -148,13 +153,13 @@ export default function AddFood (props) {
                             <p className='text-danger'>{formik.errors.foodOrigin}</p>
                         </div>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Công Thức:</label>
                         <div className="col-xs-9">
                             <textarea rows={3} name="cookingRecipe" className="form-control" id="postalAddress" onChange={formik.handleChange} />
                             <p className='text-danger'>{formik.errors.cookingRecipe}</p>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
                         <div>

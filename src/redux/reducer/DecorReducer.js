@@ -1,6 +1,7 @@
 const stateDefault = {
     arrDecor: [],
-    getDecorByID: {}
+    getDecorByID: {},
+    getDecorProuctByID: []
 }
 
 
@@ -17,6 +18,10 @@ export const DecorReducer = (state = stateDefault, action) => {
         }
         case 'SEARCH_DECOR_BY_ID': {
             state.getDecorByID = action.getDecorByID;
+            return { ...state }
+        }
+        case 'SEARCH_DECOR_PRODUCT_BYID': {
+            state.getDecorProuctByID = action.getDecorProuctByID;
             return { ...state }
         }
         default: return state;

@@ -21,7 +21,8 @@ export default function AddRoom (props) {
             .required("Không bỏ trống!"),
         parking: Yup.string()
             .required("Không bỏ trống!"),
-        capacity: Yup.string()
+        capacity: Yup.number()
+            .min(1, "Số Lượng khách không được dưới 1!")
             .required("Không bỏ trống!"),
         roomImage: Yup.string()
             .required("Không bỏ trống!"),
@@ -75,8 +76,8 @@ export default function AddRoom (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='' style={{ fontSize: '25px' }}><NavLink to='/room'>Nơi Diễn Sự Kiện</NavLink> / <span>Thêm Mới Nơi Diễn Ra</span></div>
-
+                    {/* <div className='' style={{ fontSize: '25px' }}><NavLink to='/room'>Nơi Diễn Sự Kiện</NavLink> / <span>Thêm Mới Nơi Diễn Ra</span></div> */}
+                    <div className='d-flex justify-content-between align-items-center' style={{ fontSize: '25px' }}><NavLink to='/room' style={{ textDecoration: 'none', paddingRight: '10px' }}>Nơi Tổ Chức Sự Kiện</NavLink> / <span style={{ paddingTop: '2px', fontSize: '25px', paddingLeft: '10px' }}>Thêm mới địa điễm</span> </div>
                 </div>
             </div>
             <div className='container'>
@@ -116,7 +117,7 @@ export default function AddRoom (props) {
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
                         <div>
-                            <img src={formik.values.roomImage} width={300} height={300} />
+                            {formik.values.roomImage === "" ? <div></div> : <img src={formik.values.roomImage} width={300} height={300} />}
                         </div>
                         <input type="file" name="roomImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">

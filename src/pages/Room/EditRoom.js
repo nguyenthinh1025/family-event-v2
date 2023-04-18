@@ -82,7 +82,8 @@ export default function EditRoom (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='' style={{ fontSize: '25px' }}><NavLink to='/room'>Nơi Diễn Sự Kiện</NavLink> / <span>Chỉnh sửa Nơi Diễn Ra</span> / <span style={{ color: 'red' }}>{detailRoom.roomName}</span></div>
+                    <div className='d-flex justify-content-between align-items-center' style={{ fontSize: '25px' }}><NavLink to='/rom' style={{ textDecoration: 'none', paddingRight: '10px' }}>Nơi Diễn Sự Kiện</NavLink> / <span style={{ paddingTop: '2px', fontSize: '25px', paddingLeft: '10px', paddingRight: '10px' }}>Chỉnh sửa địa điễm</span> / <span style={{ paddingTop: '2px', color: 'red', fontSize: '25px', paddingLeft: '10px' }}>{detailRoom.roomName}</span></div>
+                    {/* <div className='' style={{ fontSize: '25px' }}><NavLink to='/room'>Nơi Diễn Sự Kiện</NavLink> / <span>Chỉnh sửa Nơi Diễn Ra</span> / <span style={{ color: 'red' }}>{detailRoom.roomName}</span></div> */}
 
                 </div>
             </div>
@@ -123,7 +124,7 @@ export default function EditRoom (props) {
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
                         <div>
-                            <img src={formik.values.roomImage} width={300} height={300} />
+                            <img src={formik.values.roomImage} width={300} height={300} style={{ marginBottom: '20px' }} />
                         </div>
                         <input type="file" name="roomImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">
@@ -139,8 +140,8 @@ export default function EditRoom (props) {
                     <br />
                     <div className="form-group">
                         <div className="col-xs-offset-3 col-xs-9">
-                            <input type="submit" className="btn btn-primary" defaultValue="Submit" />
-                            <input type="reset" className="btn btn-default" defaultValue="Reset" />
+                            <input type="submit" className="btn btn-primary" defaultValue="Submit" value="Chỉnh sửa" />
+
                         </div>
                     </div>
                 </form>

@@ -15,16 +15,18 @@ export default function AddMenu (props) {
         menuName: Yup.string()
             .required("Không bỏ trống!"),
         priceTotal: Yup.number()
+            .min(1, "Giá tiền không bé hơn 1")
             .required("Không bỏ trống!"),
 
     })
 
     const formik = useFormik({
         initialValues: {
-            menuId: "ds",
+            menuId: "string",
             menuName: "",
-            priceTotal: "",
-            status: true
+            priceTotal: 0,
+            status: true,
+            tableQuantity: 0
         },
         enableReinitialize: true,
         validationSchema: validation,

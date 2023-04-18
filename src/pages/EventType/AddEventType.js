@@ -69,7 +69,8 @@ export default function AddEventType (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='' style={{ fontSize: '25px' }}><NavLink to='/eventtype' style={{ textDecoration: 'none' }}>Loại Sự Kiện</NavLink> / <span>Thêm mới loại sự kiện</span> </div>
+                    <div className='d-flex' style={{ fontSize: '25px' }}><NavLink to='/eventtype' style={{ paddingRight: '10px' }}>Loại Sự Kiện</NavLink> / <span style={{ paddingLeft: '10px', paddingTop: '5px', fontSize: '25px' }}>Thêm mới loại sự kiện</span> </div>
+
 
                 </div>
             </div>
@@ -88,12 +89,18 @@ export default function AddEventType (props) {
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
-                        <div className="col-xs-9">
-                            <textarea rows={3} name="eventTypeDescription" className="form-control" id="postalAddress" onChange={formik.handleChange} />
-                            <p className='text-danger'>{formik.errors.eventTypeDescription}</p>
+                    <div className='row'>
+                        <div className="form-group col">
+                            <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
+                            <div className="col-xs-9">
+                                <textarea rows={3} name="eventTypeDescription" className="form-control" id="postalAddress" onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.eventTypeDescription}</p>
+                            </div>
                         </div>
+                        <div className="form-group col">
+
+                        </div>
+
                     </div>
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
@@ -117,8 +124,8 @@ export default function AddEventType (props) {
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
 
     )
 }

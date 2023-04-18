@@ -6,7 +6,7 @@ import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-s
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { DeleteMenuAction, GetListMenuAction } from '../../redux/action/MenuAction';
-import { GetScriptAction } from '../../redux/action/ScriptAction';
+import { DeleteScriptAction, GetScriptAction } from '../../redux/action/ScriptAction';
 export default function Script () {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -57,8 +57,13 @@ export default function Script () {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='container display-6 fw-bold '>Danh Sách Menu</div>
-                    <NavLink to='/addmenu'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink>
+                    <div className='container display-6 fw-bold title '>Danh Sách Kịch Bản</div>
+                    <NavLink className='test' to='/addentertainment'>
+                        <div className="primary-button">
+                            <div className="custom-button">Thêm Mới</div>
+                        </div>
+                    </NavLink>
+                    {/* <NavLink to='/addmenu'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
                 </div>
             </div>
             <div className="container-fluid mt-2 mb-2" >
@@ -111,9 +116,9 @@ export default function Script () {
                                                                 <div className='d-flex justify-content-end'>
                                                                     <NavLink to={`/editscript/${data.id}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
                                                                     <div style={{ cursor: 'pointer' }} onClick={async () => {
-                                                                        const action = await DeleteMenuAction(data.menuId)
+                                                                        const action = await DeleteScriptAction(data.id)
                                                                         await dispatch(action)
-                                                                        toast.error(`Xóa menu ${data.menuName} thành công`, {
+                                                                        toast.error(`Xóa kịch bản ${data.scriptName} thành công`, {
                                                                             position: toast.POSITION.TOP_RIGHT
                                                                         });
                                                                     }}><img src='./../../images/delete.svg' width={30} /></div>

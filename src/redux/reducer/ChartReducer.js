@@ -27,6 +27,18 @@ const stateDefault = {
     tron10: [],
     tron11: [],
     tron12: [],
+    price1: {},
+    price2: {},
+    price3: {},
+    price4: {},
+    price5: {},
+    price6: {},
+    price7: {},
+    price8: {},
+    price9: {},
+    price10: {},
+    price11: {},
+    price12: {},
 }
 
 
@@ -146,6 +158,54 @@ export const ChartReducer = (state = stateDefault, action) => {
         }
         case 'TRON_12': {
             state.tron12 = action.tron12;
+            return { ...state }
+        }
+        case 'PRICE_1': {
+            state.price1 = action.price1;
+            return { ...state }
+        }
+        case 'PRICE_2': {
+            state.price2 = action.price2;
+            return { ...state }
+        }
+        case 'PRICE_3': {
+            state.price3 = action.price3;
+            return { ...state }
+        }
+        case 'PRICE_4': {
+            state.price4 = action.price4;
+            return { ...state }
+        }
+        case 'PRICE_5': {
+            state.price5 = action.price5;
+            return { ...state }
+        }
+        case 'PRICE_6': {
+            state.price6 = action.price6;
+            return { ...state }
+        }
+        case 'PRICE_7': {
+            state.price7 = action.price7;
+            return { ...state }
+        }
+        case 'PRICE_8': {
+            state.price8 = action.price8;
+            return { ...state }
+        }
+        case 'PRICE_9': {
+            state.price9 = action.price9;
+            return { ...state }
+        }
+        case 'PRICE_10': {
+            state.price10 = action.price10;
+            return { ...state }
+        }
+        case 'PRICE_11': {
+            state.price11 = action.price11;
+            return { ...state }
+        }
+        case 'PRICE_12': {
+            state.price12 = action.price12;
             return { ...state }
         }
         default: return state;

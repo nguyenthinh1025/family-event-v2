@@ -75,7 +75,8 @@ export default function EditEventType (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='' style={{ fontSize: '25px' }}><NavLink to='/eventtype'>Loại Sự Kiện</NavLink> / <span>Chỉnh sửa loại sự kiện</span> / <span style={{ color: 'red' }}>{arrEventTypeByID.eventTypeName}</span></div>
+                    {/* <div className='' style={{ fontSize: '25px' }}><NavLink to='/eventtype'>Loại Sự Kiện</NavLink> / <span>Chỉnh sửa loại sự kiện</span> / <span style={{ color: 'red' }}>{arrEventTypeByID.eventTypeName}</span></div> */}
+                    <div className='d-flex' style={{ fontSize: '25px' }}><NavLink to='/event' style={{ paddingRight: '10px' }}>Sự Kiện</NavLink> / <span style={{ paddingLeft: '10px', paddingRight: '10px', fontSize: '25px', paddingTop: '5px' }}>Chỉnh sửa loại sự kiện</span> / <span style={{ color: 'red', paddingLeft: '10px', paddingRight: '10px', fontSize: '25px', paddingTop: '5px' }}>{arrEventTypeByID.eventTypeName}</span></div>
 
                 </div>
             </div>
@@ -93,12 +94,17 @@ export default function EditEventType (props) {
 
                         </div>
                     </div>
+                    <div className='row'>
+                        <div className="form-group col">
+                            <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
+                            <div className="col-xs-9">
+                                <textarea rows={3} name="eventTypeDescription" className="form-control" id="postalAddress" defaultValue={""} value={formik.values.eventTypeDescription} onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.eventTypeDescription}</p>
+                            </div>
+                        </div>
 
-                    <div className="form-group">
-                        <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
-                        <div className="col-xs-9">
-                            <textarea rows={3} name="eventTypeDescription" className="form-control" id="postalAddress" defaultValue={""} value={formik.values.eventTypeDescription} onChange={formik.handleChange} />
-                            <p className='text-danger'>{formik.errors.eventTypeDescription}</p>
+                        <div className="form-group col">
+
                         </div>
                     </div>
                     <div className="form-group">

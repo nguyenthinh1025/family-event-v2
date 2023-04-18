@@ -19,7 +19,7 @@ export default function Login () {
             if (value.username === "admin" && value.password === "1234") {
                 localStorage.setItem('admin', 'admin')
                 localStorage.setItem('username', 'admin')
-                history.push('/')
+                history.push('/admin')
                 window.location.reload()
             }
             else {

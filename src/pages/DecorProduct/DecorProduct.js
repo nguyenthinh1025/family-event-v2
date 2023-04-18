@@ -115,7 +115,7 @@ export default function DecorProduct () {
 
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>
-                                                                    <NavLink to={`/editdecorproduct/${data.decorationId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
+                                                                    <NavLink to={`/editdecorproduct/${data.decorationId}/${data.product?.productId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
                                                                     <div style={{ cursor: 'pointer' }} onClick={async () => {
                                                                         const action = await DeleteDecorAction(data.decorationId)
                                                                         await dispatch(action)

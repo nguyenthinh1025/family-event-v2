@@ -48,7 +48,7 @@ export const GetFoodTypeByIDAction = (id) => {
 export const DeleteFoodTypeAction = (id) => {
     return async (dispatch) => {
         try {
-            let result = await http.delete(`/FoodType/delete-FoodType/${id}?id=${id}`);
+            let result = await http.delete(`/FoodType/delete-FoodType?id=${id}`);
             const action = GetFoodTypeAction()
             dispatch(action)
         } catch (error) {
@@ -75,10 +75,10 @@ export const SearchFoodTypeAction = (name) => {
     }
 }
 
-export const UpdateFoodTypeAction = (id, value) => {
+export const UpdateFoodTypeAction = (value) => {
     return async (dispatch) => {
         try {
-            let result = await http.put("/FoodType/update-FoodType/" + id, value);
+            let result = await http.put("/FoodType/update-FoodType", value);
             console.log(result.data.data);
             console.log(result);
             const action = GetFoodTypeAction()

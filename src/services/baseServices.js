@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const http = axios.create({
     baseURL: "https://familyeventt.herokuapp.com/api",
-    timeout: 3000
+    // timeout: 3000
 })
     ;
 http.interceptors.request.use((config) => {

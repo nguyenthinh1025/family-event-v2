@@ -111,7 +111,7 @@ export default function Entertainment () {
                                                     return (
                                                         <tr key={index}>
                                                             <td>{++index}</td>
-                                                            <td>{data.entertainmentTotal}</td>
+                                                            <td>{data.entertainmentTotal.toLocaleString()} vnđ</td>
 
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>

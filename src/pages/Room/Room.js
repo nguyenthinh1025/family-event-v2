@@ -57,8 +57,13 @@ export default function Room () {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='container display-6 fw-bold '>Danh Sách Nơi Diễn Sự Kiện </div>
-                    <NavLink to='/addroom'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink>
+                    <div className='container display-6 fw-bold title'>Danh Sách Nơi Tổ Chức Sự Kiện </div>
+                    {/* <NavLink to='/addroom'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
+                    <NavLink className='test' to='/addroom'>
+                        <div className="primary-button">
+                            <div className="custom-button">Thêm Mới</div>
+                        </div>
+                    </NavLink>
                 </div>
             </div>
             <div className="container-fluid mt-2 mb-2" >
@@ -96,9 +101,9 @@ export default function Room () {
                                                 <th>Tên Nơi Diễn Ra</th>
                                                 <th>Bãi Đổ Xe</th>
                                                 <th>Số Lượng Khách Mời</th>
-                                                <th>Chi Tiết</th>
+                                                <th style={{ width: '300px' }}>Chi Tiết</th>
                                                 <th>Hình Ảnh</th>
-                                                <th className='d-flex justify-content-end pr-4'>Hành Động</th>
+                                                <th style={{ position: 'relative' }}><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -108,9 +113,9 @@ export default function Room () {
                                                         <tr key={index}>
                                                             <td>{++index}</td>
                                                             <td>{data.roomName}</td>
-                                                            <td>{data.parking}</td>
-                                                            <td className='pl-5'>{data.capacity}</td>
-                                                            <td>{data.roomDescription}</td>
+                                                            <td>{data.parking} xe</td>
+                                                            <td className='pl-5'>{data.capacity} người/phòng </td>
+                                                            <td>{data.roomDescription.slice(0, 250)}</td>
                                                             <td><img src={data.roomImage} className="rounded " width={100} height={100} alt="hình nơi sự kiện" /></td>
 
                                                             <td>
@@ -119,7 +124,7 @@ export default function Room () {
                                                                     <div style={{ cursor: 'pointer' }} onClick={async () => {
                                                                         const action = await DeleteRoomAction(data.roomId)
                                                                         await dispatch(action)
-                                                                        toast.error(`Xóa nơi diễn ra ${data.roomName} thành công`, {
+                                                                        toast.error(`Xóa nơi tổ chức ${data.roomName} thành công`, {
                                                                             position: toast.POSITION.TOP_RIGHT
                                                                         });
                                                                     }}><img src='./../../images/delete.svg' width={30} /></div>

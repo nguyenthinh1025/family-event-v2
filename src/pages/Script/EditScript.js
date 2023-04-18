@@ -36,7 +36,7 @@ export default function EditScript (props) {
         validationSchema: validation,
         onSubmit: async (value) => {
             console.log(value);
-            const action = await UpdateScriptAction(value.id, value);
+            const action = await UpdateScriptAction(value);
             await dispatch(action)
             toast(`Cập nhật ${formik.values.scriptName} thành công`, {
                 position: toast.POSITION.TOP_RIGHT

@@ -32,7 +32,7 @@ export const GetEntertainmentAction = () => {
 export const GetEntertainmentByActionAction = (id) => {
     return async (dispatch) => {
         try {
-            let result = await http.get(`/Entertainment/get-by-id-Entertainment?EntertainmentId=${id}`);
+            let result = await http.get(`/EntertainmentProduct/get-by-entertainment-product?entertainmentId=${id}`);
             console.log(result.data.data);
             console.log(result);
             const action = {
@@ -82,6 +82,24 @@ export const DeleteEntertainmenAction = (id) => {
             const action = GetEntertainmentAction()
             dispatch(action)
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export const GetEntertainmentByIDActionAction = (pro, en) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get(`/EntertainmentProduct/get-by-entertainment-product?entertainmentProductId=${pro}&entertainmentId=${en}`);
+            console.log(result.data.data);
+            console.log(result);
+            const action = {
+                type: "GET_LIST_ENTERTAINMENT_ID2",
+                arrEntertainmentProduct: result.data.data[0]
+            }
+            dispatch(action)
         } catch (error) {
             console.log(error);
         }

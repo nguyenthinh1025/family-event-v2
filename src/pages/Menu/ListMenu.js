@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import Pagination from 'rc-pagination';
 import { useDispatch, useSelector } from 'react-redux';
+import { DeleteDrinkAction } from '../../redux/action/DrinkAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { DeleteGameAction, GetGameAction } from '../../redux/action/GameAction';
-import { DeleteShowAction, GetShowAction } from '../../redux/action/ShowAction';
-export default function Show () {
+import { DeleteFoodAction, GetFoodAction } from '../../redux/action/FoodAction';
+import { useFormik } from 'formik';
+import * as Yup from "yup";
+import { AddMenuListAction } from '../../redux/action/MenuAction';
+export default function ListMenu () {
     const dispatch = useDispatch();
+    const { arrMenuList } = useSelector(root => root.MenuReducer);
+    console.log(arrMenuList);
     useEffect(() => {
-        const action = GetShowAction();
-        dispatch(action)
+        // const action = GetFoodAction();
+        // dispatch(action)
 
     }, []);
-    const { arrShow } = useSelector(root => root.ShowReducer);
-    console.log(arrShow);
+
     const [perPage, setPerPage] = useState(5);
     const [size, setSize] = useState(perPage);
     const [current, setCurrent] = useState(1);
     const [search, setSearch] = useState('');
     const PerPageChange = (value) => {
         setSize(value);
-        const newPerPage = Math.ceil(arrShow.length / value);
+        const newPerPage = Math.ceil(arrMenuList.length / value);
         if (current > newPerPage) {
             setCurrent(newPerPage);
         }
@@ -30,12 +34,12 @@ export default function Show () {
 
     const getData = (current, pageSize) => {
         // Normally you should get the data from the server
-        // return arrShow.slice((current - 1) * pageSize, current * pageSize)
+        // return arrMenuList.slice((current - 1) * pageSize, current * pageSize)
         if (search === "") {
-            return arrShow.slice((current - 1) * pageSize, current * pageSize)
+            return arrMenuList.slice((current - 1) * pageSize, current * pageSize)
         }
         else {
-            return arrShow.filter(item => item.showServiceName.toLowerCase().includes(search.toLowerCase().trim()))
+            return arrMenuList.filter(item => item.foodName.toLowerCase().includes(search.toLowerCase().trim()))
         }
     };
 
@@ -53,20 +57,60 @@ export default function Show () {
         }
         return originalElement;
     }
+
+    const validation = Yup.object({
+        name: Yup.string()
+            .required("Không bỏ trống!"),
+    })
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+        },
+        validationSchema: validation,
+        onSubmit: async (value) => {
+
+            const newArray = await arrMenuList.map((item) => {
+                return {
+                    foodId: item.foodId,
+                    quantity: item.quantity,
+                    price: item.foodPrice * item.quantity,
+                    foodTypeId: item.foodTypeId
+                };
+            })
+            const list = {
+                menuName: value.name,
+                food: newArray
+            }
+            console.log(list);
+            dispatch(AddMenuListAction(list))
+
+        }
+    })
+
     return (
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
-                <div className=' d-flex justify-content-between'>
-                    <div className='container display-6 fw-bold title'>Danh Sách Chương Trình</div>
-                    {/* <NavLink to='/addshow'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
-                    <NavLink className='test' to='/addshow'>
-                        <div className="primary-button">
-                            <div className="custom-button">Thêm Mới</div>
+                <div className=' d-flex justify-content-between' style={{ position: 'relative' }}>
+                    <div className='container display-6 fw-bold title'>Danh Sách Đồ Ăn Đã Chọn Thêm Vào Menu</div>
+                    {/* <NavLink to='/addfood'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
+                    <form onSubmit={formik.handleSubmit}>
+                        <div style={{ position: 'absolute', left: '30px', top: '90px' }} >
+                            <div style={{ display: 'flex', width: '400px', alignContent: 'center' }}>
+                                <span style={{ width: '200px', paddingTop: '10px', fontWeight: 'bold' }}>Tên Menu :</span>
+                                <input name='name' className="form-control" onChange={formik.handleChange} />
+                            </div>
+                            <p className='text-danger ' style={{ paddingLeft: '130px' }}>{formik.errors.name}</p>
                         </div>
-                    </NavLink>
+                        <button type='submit' className='test' style={{ border: 'none!important' }} >
+                            <div className="primary-button">
+                                <div className="custom-button" >Thêm Vào Menu</div>
+                            </div>
+                        </button>
+                    </form>
                 </div>
             </div>
-            <div className="container-fluid mt-2 mb-2" >
+            <div className="container-fluid  mb-2" style={{ marginTop: '100px' }}>
 
                 <div className="row justify-content-center">
                     <div className="col-md-11">
@@ -84,7 +128,7 @@ export default function Show () {
                                             className="pagination-data"
                                             showTotal={(total, range) => `Showing ${range[0]}-${range[1]} of ${total}`}
                                             onChange={PaginationChange}
-                                            total={arrShow.length}
+                                            total={arrMenuList.length}
                                             current={current}
                                             pageSize={size}
                                             showSizeChanger={false}
@@ -98,10 +142,11 @@ export default function Show () {
                                         <thead className="thead-primary table-sorting">
                                             <tr>
                                                 <th className='ml-4'>Số Thứ Tự</th>
-                                                <th>Tên Chương Trình</th>
+                                                <th>Tên </th>
                                                 <th>Giá Tiền</th>
-                                                <th>Người Diễn</th>
                                                 <th>Hình Ảnh</th>
+                                                <th>Số Lượng</th>
+                                                <th> Loại </th>
                                                 <th style={{ position: 'relative' }}><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>
@@ -111,18 +156,39 @@ export default function Show () {
                                                     return (
                                                         <tr key={index}>
                                                             <td>{++index}</td>
-                                                            <td>{data.showServiceName}</td>
-                                                            <td>{data.showPrice.toLocaleString()} vnđ</td>
-                                                            <td>{data.singer}</td>
-                                                            <td><img src={data.showImage} className="rounded " width={100} height={100} alt="hình chương trình" /></td>
-
+                                                            <td>{data.foodName}</td>
+                                                            <td>{(data.quantity * data.foodPrice).toLocaleString()} vnđ</td>
+                                                            <td><img src={data.foodImage} className="rounded " width={100} height={100} alt="hình thức ăn" /></td>
+                                                            <td> <button className='btn btn-primary mr-2' onClick={() => {
+                                                                const action = {
+                                                                    type: 'TANG_GIAM_SO_LUONG',
+                                                                    maSanPham: data.foodId,
+                                                                    quantity: 1,
+                                                                }
+                                                                dispatch(action);
+                                                            }}>+</button>
+                                                                {data.quantity}
+                                                                <button className=' ml-2 btn btn-primary' onClick={() => {
+                                                                    const action = {
+                                                                        type: 'TANG_GIAM_SO_LUONG',
+                                                                        maSanPham: data.foodId,
+                                                                        quantity: -1,
+                                                                    }
+                                                                    console.log(action);
+                                                                    dispatch(action);
+                                                                }}>-</button>
+                                                            </td>
+                                                            <td>{data.foodType?.foodTypeName}</td>
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>
-                                                                    <NavLink to={`/editshow/${data.showId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
+
                                                                     <div style={{ cursor: 'pointer' }} onClick={async () => {
-                                                                        const action = await DeleteShowAction(data.showId)
-                                                                        await dispatch(action)
-                                                                        toast.error(`Xóa tiết mục ${data.showServiceName} thành công`, {
+                                                                        const action = {
+                                                                            type: 'XOA_SP',
+                                                                            sanPhamClick: data.foodId
+                                                                        }
+                                                                        dispatch(action);
+                                                                        toast.error(`Xóa đồ ăn ${data.foodName} thành công`, {
                                                                             position: toast.POSITION.TOP_RIGHT
                                                                         });
                                                                     }}><img src='./../../images/delete.svg' width={30} /></div>
@@ -141,7 +207,7 @@ export default function Show () {
                                         className="pagination-data"
                                         showTotal={(total, range) => `Showing ${range[0]}-${range[1]} of ${total}`}
                                         onChange={PaginationChange}
-                                        total={arrShow.length}
+                                        total={arrMenuList.length}
                                         current={current}
                                         pageSize={size}
                                         showSizeChanger={false}

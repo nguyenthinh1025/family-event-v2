@@ -110,19 +110,20 @@ export default function Decor () {
                                                         <tr key={index}>
                                                             <td>{++index}</td>
                                                             <td>{data.decorationName}</td>
-                                                            <td>{data.decorationPrice} vnđ</td>
+                                                            <td>{data.decorationPrice.toLocaleString()} vnđ</td>
                                                             <td><img src={data.decorationImage} className="rounded " width={100} height={100} alt="hình trang trí" /></td>
 
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>
+                                                                    <NavLink to={`/viewdecor/${data.decorationId}`} style={{ cursor: 'pointer' }}><img src='./../../images/view.svg' width={30} className="mr-4" /></NavLink>
                                                                     <NavLink to={`/editdecor/${data.decorationId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
-                                                                    <div style={{ cursor: 'pointer' }} onClick={async () => {
+                                                                    {/* <div style={{ cursor: 'pointer' }} onClick={async () => {
                                                                         const action = await DeleteDecorAction(data.decorationId)
                                                                         await dispatch(action)
-                                                                        toast.error(`Xóa trang trí ${data.foodTypeName} thành công`, {
+                                                                        toast.error(`Xóa trang trí ${data.decorationName} thành công`, {
                                                                             position: toast.POSITION.TOP_RIGHT
                                                                         });
-                                                                    }}><img src='./../../images/delete.svg' width={30} /></div>
+                                                                    }}><img src='./../../images/delete.svg' width={30} /></div> */}
                                                                 </div>
                                                             </td>
                                                         </tr>

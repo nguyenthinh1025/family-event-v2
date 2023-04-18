@@ -20,6 +20,27 @@ export const ChartMonth1Action = () => {
         }
     }
 }
+
+export const ChartPrice1Action = () => {
+    return async (dispatch) => {
+        try {
+            const action3 = {
+                type: "DISPLAY_LOADING"
+            }
+            dispatch(action3)
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-1-1&EndDate=2023-1-31');
+            // console.log(result.data.data[0]);
+            const action = {
+                type: "PRICE_1",
+                price1: result.data.data[0]
+            }
+            dispatch(action)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 export const ChartMonth2Action = () => {
     return async (dispatch) => {
         try {
@@ -27,6 +48,20 @@ export const ChartMonth2Action = () => {
             const action = {
                 type: "MONTH_2",
                 month2: result.data.data[0]
+            }
+            dispatch(action)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const ChartPrice2Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-2-1&EndDate=2023-2-28');
+            const action = {
+                type: "PRICE_2",
+                price2: result.data.data[0]
             }
             dispatch(action)
         } catch (error) {
@@ -42,6 +77,21 @@ export const ChartMonth3Action = () => {
             const action = {
                 type: "MONTH_3",
                 month3: result.data.data[0]
+            }
+            dispatch(action)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const ChartPrice3Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-3-1&EndDate=2023-3-31');
+
+            const action = {
+                type: "PRICE_3",
+                price3: result.data.data[0]
             }
             dispatch(action)
         } catch (error) {
@@ -65,6 +115,21 @@ export const ChartMonth4Action = () => {
     }
 }
 
+export const ChartPrice4Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-4-1&EndDate=2023-4-30');
+            const action = {
+                type: "PRICE_4",
+                price4: result.data.data[0]
+            }
+            dispatch(action)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 export const ChartMonth5Action = () => {
     return async (dispatch) => {
         try {
@@ -72,6 +137,24 @@ export const ChartMonth5Action = () => {
             const action = {
                 type: "MONTH_5",
                 month5: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const ChartPrice5Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-5-1&EndDate=2023-5-31');
+            const action = {
+                type: "PRICE_5",
+                price5: result.data.data[0]
             }
             dispatch(action)
             const action3 = {
@@ -102,6 +185,24 @@ export const ChartMonth6Action = () => {
         }
     }
 }
+export const ChartPrice6Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-6-1&EndDate=2023-6-30');
+            const action = {
+                type: "PRICE_6",
+                price6: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 export const ChartMonth7Action = () => {
     return async (dispatch) => {
         try {
@@ -109,6 +210,24 @@ export const ChartMonth7Action = () => {
             const action = {
                 type: "MONTH_7",
                 month7: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const ChartPrice7Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-7-1&EndDate=2023-7-31');
+            const action = {
+                type: "PRICE_7",
+                price7: result.data.data[0]
             }
             dispatch(action)
             const action3 = {
@@ -138,6 +257,24 @@ export const ChartMonth8Action = () => {
         }
     }
 }
+export const ChartPrice8Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-8-1&EndDate=2023-8-31');
+            const action = {
+                type: "PRICE_8",
+                price8: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 export const ChartMonth9Action = () => {
     return async (dispatch) => {
         try {
@@ -145,6 +282,24 @@ export const ChartMonth9Action = () => {
             const action = {
                 type: "MONTH_9",
                 month9: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const ChartPrice9Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-9-1&EndDate=2023-9-30');
+            const action = {
+                type: "PRICE_9",
+                price9: result.data.data[0]
             }
             dispatch(action)
             const action3 = {
@@ -174,6 +329,24 @@ export const ChartMonth10Action = () => {
         }
     }
 }
+export const ChartPrice10Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-10-1&EndDate=2023-10-30');
+            const action = {
+                type: "PRICE_10",
+                price10: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 export const ChartMonth11Action = () => {
     return async (dispatch) => {
         try {
@@ -192,6 +365,24 @@ export const ChartMonth11Action = () => {
         }
     }
 }
+export const ChartPrice11Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-11-1&EndDate=2023-11-30');
+            const action = {
+                type: "PRICE_11",
+                price11: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 export const ChartMonth12Action = () => {
     return async (dispatch) => {
         try {
@@ -199,6 +390,24 @@ export const ChartMonth12Action = () => {
             const action = {
                 type: "MONTH_12",
                 month12: result.data.data[0]
+            }
+            dispatch(action)
+            const action3 = {
+                type: "HIDE_LOADING"
+            }
+            dispatch(action3)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const ChartPrice12Action = () => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get('/Statistical/get-data-statistial?type=7&StartDate=2023-12-1&EndDate=2023-12-31');
+            const action = {
+                type: "PRICE_12",
+                price12: result.data.data[0]
             }
             dispatch(action)
             const action3 = {

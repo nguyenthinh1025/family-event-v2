@@ -62,12 +62,16 @@ export default function AddFoodType (props) {
                         </div>
                     </div>
 
+                    <div className='row'>
+                        <div className="form-group col">
+                            <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
+                            <div className="col-xs-9">
+                                <textarea rows={3} name="foodTypeDetail" className="form-control" id="postalAddress" onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.foodTypeDetail}</p>
+                            </div>
+                        </div>
+                        <div className='form-group col'>
 
-                    <div className="form-group">
-                        <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
-                        <div className="col-xs-9">
-                            <textarea rows={3} name="foodTypeDetail" className="form-control" id="postalAddress" onChange={formik.handleChange} />
-                            <p className='text-danger'>{formik.errors.foodTypeDetail}</p>
                         </div>
                     </div>
 

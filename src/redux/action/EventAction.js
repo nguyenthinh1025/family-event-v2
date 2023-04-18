@@ -31,7 +31,7 @@ export const GetEventAction = () => {
 export const GetEventByIdAction = (id) => {
     return async (dispatch) => {
         try {
-            let result = await http.get(`/Event/search-event-by-id-event?ID=${id}`);
+            let result = await http.get(`/Event/export?id=${id}`);
             console.log(result.data.data);
             const action = {
                 type: "GET_LIST_EVENTID",

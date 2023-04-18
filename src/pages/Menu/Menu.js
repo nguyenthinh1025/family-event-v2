@@ -35,7 +35,7 @@ export default function Menu () {
             return arrMenu.slice((current - 1) * pageSize, current * pageSize)
         }
         else {
-            return arrMenu.filter(item => item.decorationName.toLowerCase().includes(search.toLowerCase().trim()))
+            return arrMenu.filter(item => item.menuName.toLowerCase().includes(search.toLowerCase().trim()))
         }
     };
 
@@ -57,8 +57,13 @@ export default function Menu () {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='container display-6 fw-bold '>Danh Sách Menu</div>
-                    <NavLink to='/addmenu'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink>
+                    <div className='container display-6 fw-bold  title '>Danh Sách Menu</div>
+                    <NavLink className='test' to='/addmenulist'>
+                        <div className="primary-button">
+                            <div className="custom-button">Thêm Mới</div>
+                        </div>
+                    </NavLink>
+                    {/* <NavLink to='/addmenu'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
                 </div>
             </div>
             <div className="container-fluid mt-2 mb-2" >
@@ -95,7 +100,7 @@ export default function Menu () {
                                                 <th className='ml-4'>Số Thứ Tự</th>
                                                 <th>Tên Danh Sách</th>
                                                 <th>Giá Tiền</th>
-                                                <th className='d-flex justify-content-end pr-4'>Hành Động</th>
+                                                <th className='pr-4' style={{ position: 'relative' }} ><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -105,10 +110,11 @@ export default function Menu () {
                                                         <tr key={index}>
                                                             <td>{++index}</td>
                                                             <td>{data.menuName}</td>
-                                                            <td>{data.priceTotal}</td>
+                                                            <td>{data.priceTotal.toLocaleString()} vnđ</td>
 
                                                             <td>
                                                                 <div className='d-flex justify-content-end'>
+                                                                    <NavLink to={`/viewMenu/${data.menuId}`} style={{ cursor: 'pointer' }}><img src='./../../images/view.svg' width={30} className="mr-4" /></NavLink>
                                                                     <NavLink to={`/editmenu/${data.menuId}`} style={{ cursor: 'pointer' }}><img src='./../../images/edit.svg' width={30} className="mr-4" /></NavLink>
                                                                     <div style={{ cursor: 'pointer' }} onClick={async () => {
                                                                         const action = await DeleteMenuAction(data.menuId)

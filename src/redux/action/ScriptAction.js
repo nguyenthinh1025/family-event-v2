@@ -45,12 +45,25 @@ export const GetScriptByIDAction = (id) => {
     }
 }
 
-export const UpdateScriptAction = (id, value) => {
+export const UpdateScriptAction = (value) => {
     return async (dispatch) => {
         try {
-            let result = await http.put(`/Script/update-script/${id}`, value)
+            let result = await http.put(`/Script/update-script`, value)
             const action = GetScriptAction()
-            console.log(result);
+            dispatch(action)
+            history.push('/script')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export const DeleteScriptAction = (id) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.delete(`/Script/delete-script?Id=${id}`)
+            const action = GetScriptAction()
             dispatch(action)
             history.push('/script')
         } catch (error) {

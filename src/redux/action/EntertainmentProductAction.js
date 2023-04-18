@@ -1,4 +1,6 @@
+import { history } from "../../App";
 import { http } from "../../services/baseServices";
+import { GetEntertainmentAction } from "./EntertainmentAction";
 
 
 
@@ -39,6 +41,55 @@ export const GetEntertainmentProductByIDAction = (id) => {
                 arrEntertainmentProductById: result.data.data
             }
             dispatch(action)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+
+export const UpdateEntertainmentProductAction = (value) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.put(`/EntertainmentProduct/update-entertainment-product`, value);
+
+            const action = GetEntertainmentProductAction()
+            dispatch(action)
+            // history.push('/entertainment')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export const DeleteEntertainmentProductAction = (value) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.delete(`/EntertainmentProduct/delete-entertainment-product?entertainmentProductId=${value}`);
+
+            const action = GetEntertainmentProductAction()
+            dispatch(action)
+            // history.push('/entertainment')
+            console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+
+export const AddEntertainmentProductAction = (value) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.post(`/EntertainmentProduct/insert-entertainment-product`, value);
+
+            // const action = GetEntertainmentAction()
+            // dispatch(action)
+            // history.push('/entertainment')
+            console.log(result);
         } catch (error) {
             console.log(error);
         }

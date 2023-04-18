@@ -99,10 +99,10 @@ export default function Food () {
                                         <thead className="thead-primary table-sorting">
                                             <tr>
                                                 <th className='ml-4'>Số Thứ Tự</th>
-                                                <th>Tên Thức Ăn</th>
+                                                <th>Tên </th>
                                                 <th>Giá Tiền</th>
                                                 <th>Hình Ảnh</th>
-                                                <th>Loại Đồ Ăn</th>
+                                                <th> Loại </th>
                                                 <th style={{ position: 'relative' }}><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>

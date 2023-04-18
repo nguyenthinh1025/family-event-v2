@@ -23,7 +23,7 @@ export default function Event () {
         dispatch(action1)
     }, []);
     console.log(arrEvent);
-    console.log(arrScript);
+    // console.log(arrScript);
     // const result = arrEvent.filter(item1 => arrScript.some(item2 => item2.id === item1.scriptId)).map(item => arrScript.find(obj => obj.scriptId === item.id).scriptName)
     // console.log(result[0]);
     const [perPage, setPerPage] = useState(5);
@@ -127,7 +127,7 @@ export default function Event () {
                                                             <td>{moment(data.startDate).format('DD/MM/YYYY')}</td>
                                                             <td>{moment(data.endDate).format('DD/MM/YYYY')}</td>
                                                             <td><img src={data.foodImage} className="rounded " width={100} height={100} alt="Hình Sự Kiện" /></td>
-                                                            <td>{data.totalPrice.toLocaleString()}</td>
+                                                            <td>{data.totalPrice.toLocaleString()} vnđ</td>
                                                             <td>{data.eventType?.eventTypeName}</td>
 
                                                             <td>

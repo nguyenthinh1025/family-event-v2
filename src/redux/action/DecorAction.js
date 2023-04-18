@@ -62,6 +62,21 @@ export const GetDecorByIdAction = (id) => {
         }
     }
 }
+export const GetDecorProductByIdAction = (id) => {
+    return async (dispatch) => {
+        try {
+            let result = await http.get(`/DecorationProduct/filter-decoration-product?decorationId=${id}&quantityOption=true`);
+
+            const action = {
+                type: "SEARCH_DECOR_PRODUCT_BYID",
+                getDecorProuctByID: result.data.data
+            }
+            dispatch(action)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
 export const DeleteDecorAction = (id) => {
     return async (dispatch) => {

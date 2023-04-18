@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ChartMonth10Action, ChartMonth11Action, ChartMonth12Action, ChartMonth1Action, ChartMonth2Action, ChartMonth3Action, ChartMonth4Action, ChartMonth5Action, ChartMonth6Action, ChartMonth7Action, ChartMonth8Action, ChartMonth9Action, ChartMonthTron10Action, ChartMonthTron11Action, ChartMonthTron12Action, ChartMonthTron1Action, ChartMonthTron2Action, ChartMonthTron3Action, ChartMonthTron4Action, ChartMonthTron5Action, ChartMonthTron6Action, ChartMonthTron7Action, ChartMonthTron8Action, ChartMonthTron9Action, ChartQuy1Action, ChartQuy2Action, ChartQuy3Action, ChartQuy4Action } from '../../redux/action/Chart';
+import { ChartMonth10Action, ChartMonth11Action, ChartMonth12Action, ChartMonth1Action, ChartMonth2Action, ChartMonth3Action, ChartMonth4Action, ChartMonth5Action, ChartMonth6Action, ChartMonth7Action, ChartMonth8Action, ChartMonth9Action, ChartMonthTron10Action, ChartMonthTron11Action, ChartMonthTron12Action, ChartMonthTron1Action, ChartMonthTron2Action, ChartMonthTron3Action, ChartMonthTron4Action, ChartMonthTron5Action, ChartMonthTron6Action, ChartMonthTron7Action, ChartMonthTron8Action, ChartMonthTron9Action, ChartPrice10Action, ChartPrice11Action, ChartPrice12Action, ChartPrice1Action, ChartPrice2Action, ChartPrice3Action, ChartPrice4Action, ChartPrice5Action, ChartPrice6Action, ChartPrice7Action, ChartPrice8Action, ChartPrice9Action, ChartQuy1Action, ChartQuy2Action, ChartQuy3Action, ChartQuy4Action } from '../../redux/action/Chart';
 import { batch, useDispatch, useSelector } from 'react-redux';
 import Chart from 'chart.js/auto';
 
@@ -71,6 +71,31 @@ export default function Dashboard () {
             dispatch(tron11)
             const tron12 = ChartMonthTron12Action();
             dispatch(tron12)
+
+            const price1 = ChartPrice1Action();
+            dispatch(price1)
+            const price2 = ChartPrice2Action();
+            dispatch(price2)
+            const price3 = ChartPrice3Action();
+            dispatch(price3)
+            const price4 = ChartPrice4Action();
+            dispatch(price4)
+            const price5 = ChartPrice5Action();
+            dispatch(price5)
+            const price6 = ChartPrice6Action();
+            dispatch(price6)
+            const price7 = ChartPrice7Action();
+            dispatch(price7)
+            const price8 = ChartPrice8Action();
+            dispatch(price8)
+            const price9 = ChartPrice9Action();
+            dispatch(price9)
+            const price10 = ChartPrice10Action();
+            dispatch(price10)
+            const price11 = ChartPrice11Action();
+            dispatch(price11)
+            const price12 = ChartPrice12Action();
+            dispatch(price12)
         })
     }, []);
 
@@ -224,6 +249,9 @@ export default function Dashboard () {
                                 </li>
                                 <li>
                                     <NavLink to='/chartmonth'>Thông kê theo tháng</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/chartprice'>Thông kê doanh thu trong năm</NavLink>
                                 </li>
                             </ul>
                         </li>

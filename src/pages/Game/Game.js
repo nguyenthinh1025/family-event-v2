@@ -59,7 +59,12 @@ export default function Game () {
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
                     <div className='container display-6 fw-bold '>Danh Sách Trò Chơi</div>
-                    <NavLink to='/addgame'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink>
+                    {/* <NavLink to='/addgame'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
+                    <NavLink className='test' to='/addgame'>
+                        <div className="primary-button">
+                            <div className="custom-button">Thêm Mới</div>
+                        </div>
+                    </NavLink>
                 </div>
             </div>
             <div className="container-fluid mt-2 mb-2" >
@@ -97,7 +102,7 @@ export default function Game () {
                                                 <th>Tên Trò Chơi</th>
                                                 <th>Nơi Diễn</th>
                                                 <th>Hình Ảnh</th>
-                                                <th className='d-flex justify-content-end pr-4'>Hành Động</th>
+                                                <th style={{ position: 'relative' }}><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>
                                         <tbody>

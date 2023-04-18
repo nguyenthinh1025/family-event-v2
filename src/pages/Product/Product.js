@@ -17,7 +17,7 @@ export default function Product () {
     }, []);
     const { arrProduct } = useSelector(root => root.ProductReducer);
     console.log(arrProduct);
-    const [perPage, setPerPage] = useState(10);
+    const [perPage, setPerPage] = useState(5);
     const [size, setSize] = useState(perPage);
     const [current, setCurrent] = useState(1);
     const [search, setSearch] = useState('');
@@ -58,8 +58,13 @@ export default function Product () {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='container display-6 fw-bold '>Danh Sách Dụng Cụ</div>
-                    <NavLink to='/addproduct'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink>
+                    <div className='container display-6 fw-bold title'>Danh Sách Dụng Cụ</div>
+                    {/* <NavLink to='/addproduct'><button className='btn btn-primary' style={{ width: '150px' }}>Add New</button></NavLink> */}
+                    <NavLink className='test' to='/addproduct'>
+                        <div className="primary-button">
+                            <div className="custom-button">Thêm Mới</div>
+                        </div>
+                    </NavLink>
                 </div>
             </div>
             <div className="container-fluid mt-2 mb-2" >
@@ -98,7 +103,7 @@ export default function Product () {
                                                 <th>Chi Tiết</th>
                                                 <th>Nơi Cung Cấp</th>
                                                 <th>Hình Ảnh</th>
-                                                <th className='d-flex justify-content-end pr-4'>Hành Động</th>
+                                                <th style={{ position: 'relative' }}><div style={{ position: 'absolute', right: '20px', bottom: '7px' }}>Hành Động</div></th>
                                             </tr>
                                         </thead>
                                         <tbody>

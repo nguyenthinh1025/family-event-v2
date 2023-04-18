@@ -24,17 +24,17 @@ export default function EditGame (props) {
 
     const validation = Yup.object({
         gameName: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameDetails: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameRules: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameReward: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         supplies: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameImage: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
     })
 
     const formik = useFormik({
@@ -135,7 +135,7 @@ export default function EditGame (props) {
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
-                        <div>
+                        <div className='mb-3'>
                             <img src={formik.values.gameImage} width={300} height={300} />
                         </div>
                         <input type="file" name="gameImage" id="file" className="input-file" onChange={uploadFile} />

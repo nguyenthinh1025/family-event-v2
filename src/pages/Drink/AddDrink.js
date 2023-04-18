@@ -15,31 +15,32 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 export default function AddDrink () {
     const dispatch = useDispatch()
     const validation = Yup.object({
-        drinkName: Yup.string()
-            .min(2, "Name mininum 2 characters")
-            .max(100, " Name maximum 100 characters")
-            .required("Required!"),
-        drinkQuantity: Yup.number()
-            .min(1, " Quantity min 1")
-            .required("Required!"),
-        drinkPrice: Yup.number()
-            .min(1, " Price min 1")
-            .required("Required!"),
-        drinkDetail: Yup.string()
-            .min(2, "Detail mininum 2 characters")
-            .required("Required!"),
-        drinkImage: Yup.string()
-            .required("Required!"),
+        foodName: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .max(150, "Tối đa 150 kí tự")
+            .required("Không bỏ trống!"),
+        foodPrice: Yup.number()
+            .min(1, "Giá tiền không bé hơn 1")
+            .required("Không bỏ trống!"),
+        foodDescription: Yup.string()
+            .min(2, "Tối thiểu 2 kí tự")
+            .required("Không bỏ trống!"),
+        foodImage: Yup.string()
+            .required("Không bỏ trống!"),
     })
 
     const formik = useFormik({
         initialValues: {
-            drinkId: "string",
-            drinkName: "",
-            drinkQuantity: 0,
-            drinkPrice: 0,
-            drinkDetail: "",
-            drinkImage: "",
+            foodId: "string",
+            foodName: "",
+            dish: "string",
+            foodPrice: 0,
+            foodDescription: "string",
+            foodIngredient: "string",
+            foodOrigin: "string",
+            cookingRecipe: "string",
+            foodImage: "string",
+            foodTypeId: "FTIdd02f8f3b-4b82-4013-",
             status: true
         },
         validationSchema: validation,
@@ -47,9 +48,9 @@ export default function AddDrink () {
             console.log(value);
             const action = await AddDrinkAction(value);
             await dispatch(action);
-            toast(`Add Drink ${formik.values.drinkName} thành công`, {
-                position: toast.POSITION.TOP_RIGHT
-            });
+            // toast(`Thêm mới nước ${formik.values.foodName} thành công`, {
+            //     position: toast.POSITION.TOP_RIGHT
+            // });
         }
 
     })
@@ -68,7 +69,7 @@ export default function AddDrink () {
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     console.log(url);
-                    formik.setFieldValue("drinkImage", url)
+                    formik.setFieldValue("foodImage", url)
                 })
             }
         )
@@ -87,61 +88,47 @@ export default function AddDrink () {
                 <form className="form-horizontal" onSubmit={formik.handleSubmit}>
                     <div className='row'>
                         <div className="form-group col">
-                            <label className="control-label col-xs-3" htmlFor="inputEmail">Tên Thức Uống:</label>
+                            <label className="control-label col-xs-3" htmlFor="inputEmail">Tên Nước Uống:</label>
                             <div className="col-xs-9">
-                                <input name="drinkName" className="form-control" id="inputEmail" onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.drinkName}</p>
+                                <input name="foodName" className="form-control" id="inputEmail" onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.foodName}</p>
                             </div>
                         </div>
-                        <div className="form-group col">
-                            <label className="control-label col-xs-3" htmlFor="inputPassword">Số Lượng:</label>
-                            <div className="col-xs-9">
-                                <input type="number" className="form-control" id="inputPassword" name="drinkQuantity" onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.drinkQuantity}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row'>
-
                         <div className="form-group col">
                             <label className="control-label col-xs-3" htmlFor="inputPassword">Giá Tiền:</label>
                             <div className="col-xs-9">
-                                <input type="number" className="form-control" id="inputPassword" name="drinkPrice" onChange={formik.handleChange} />
-                                <p className='text-danger'>{formik.errors.drinkPrice}</p>
+                                <input type="number" className="form-control" id="inputPassword" name="foodPrice" onChange={formik.handleChange} />
+                                <p className='text-danger'>{formik.errors.foodPrice}</p>
                             </div>
                         </div>
                     </div>
+
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Chi Tiết:</label>
                         <div className="col-xs-9">
-                            <textarea rows={3} name="drinkDetail" className="form-control" id="postalAddress" onChange={formik.handleChange} />
-                            <p className='text-danger'>{formik.errors.drinkDetail}</p>
+                            <textarea rows={3} name="foodDescription" className="form-control" id="postalAddress" onChange={formik.handleChange} />
+                            <p className='text-danger'>{formik.errors.foodDescription}</p>
                         </div>
                     </div>
-
-
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
                         <div>
-                            {formik.values.drinkImage === "" ? <div></div> : <img src={formik.values.drinkImage} width={300} height={300} />}
+                            {formik.values.foodImage === "" ? <div></div> : <img src={formik.values.foodImage} width={300} height={300} />}
                         </div>
-                        <input type="file" name="drinkImage" id="file" className="input-file" onChange={uploadFile} />
+                        <input type="file" name="foodImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">
                             <FontAwesomeIcon icon={faUpload} />
-                            <span className="js-fileName pl-2">Choose a file</span>
+                            <span className="js-fileName pl-2">Tải hình ảnh</span>
                         </label>
-                        <p className='text-danger'>{formik.errors.drinkImage}</p>
+                        <p className='text-danger'>{formik.errors.foodImage}</p>
                     </div>
-
-
-
 
                     <br />
                     <div className="form-group">
                         <div className="col-xs-offset-3 col-xs-9">
-                            <input type="submit" className="btn btn-primary" defaultValue="Submit" value="Thêm Mới" />
+                            <input type="submit" className="btn btn-primary" defaultValue="Submit" value='Thêm Mới' />
                             {/* <input type="reset" className="btn btn-default" defaultValue="Reset" /> */}
                         </div>
                     </div>

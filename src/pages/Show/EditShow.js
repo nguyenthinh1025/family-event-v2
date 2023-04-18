@@ -10,8 +10,11 @@ import { toast } from 'react-toastify';
 import { history } from '../../App';
 import { DetailGameAction, UpdateGameAction } from '../../redux/action/GameAction';
 import { DetailShowAction, UpdateShowAction } from '../../redux/action/ShowAction';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function EditShow (props) {
     const { detailShow } = useSelector(root => root.ShowReducer);
+    console.log(detailShow);
     const dispatch = useDispatch()
     const { id } = props.match.params;
     useEffect(() => {
@@ -25,7 +28,7 @@ export default function EditShow (props) {
         showServiceName: Yup.string()
             .required("Không bỏ trống!"),
         showPrice: Yup.number()
-            .min(1)
+            .min(1, "Giá tiền không bé hơn 1")
             .required("Không bỏ trống!"),
         light: Yup.string()
             .required("Không bỏ trống!"),
@@ -145,12 +148,12 @@ export default function EditShow (props) {
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
-                        <div>
+                        <div className='mb-3'>
                             <img src={formik.values.showImage} width={300} height={300} />
                         </div>
                         <input type="file" name="showImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">
-                            <i className="icon fa fa-check" />
+                            <FontAwesomeIcon icon={faUpload} />
                             <span className="js-fileName">Choose a file</span>
                         </label>
                         <p className='text-danger'>{formik.errors.showImage}</p>

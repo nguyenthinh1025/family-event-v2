@@ -51,7 +51,7 @@ export const AddDrinkAction = (value) => {
             let result = await http.post('/Drink/insert-drink', value)
             const action = GetDrinkAction();
             dispatch(action);
-            history.goBack();
+            history.push('/drink');
             toast(`Thêm mới thành công`, {
                 position: toast.POSITION.TOP_RIGHT
             });
@@ -65,7 +65,7 @@ export const AddDrinkAction = (value) => {
 export const DeleteDrinkAction = (value) => {
     return async (dispatch) => {
         try {
-            let result = await http.delete('/Drink/delete-drink?drinkId=' + value)
+            let result = await http.delete(`/Drink/delete-drink?drinkId=${value}`)
             const action = GetDrinkAction();
             dispatch(action);
 

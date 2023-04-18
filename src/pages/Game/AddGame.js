@@ -9,22 +9,24 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 import { history } from '../../App';
 import { AddGameAction, DetailGameAction, UpdateGameAction } from '../../redux/action/GameAction';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 export default function AddGame (props) {
     const dispatch = useDispatch()
 
     const validation = Yup.object({
         gameName: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameDetails: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameRules: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameReward: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         supplies: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
         gameImage: Yup.string()
-            .required("Required!"),
+            .required("Không bỏ trống"),
     })
 
     const formik = useFormik({
@@ -124,12 +126,15 @@ export default function AddGame (props) {
 
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
-                        <div>
+                        {/* <div>
                             <img src={formik.values.gameImage} width={100} />
+                        </div> */}
+                        <div style={{ marginBottom: '30px' }}>
+                            {formik.values.gameImage === '' ? <div></div> : <div><img src={formik.values.gameImage} width={300} height={200} /></div>}
                         </div>
                         <input type="file" name="gameImage" id="file" className="input-file" onChange={uploadFile} />
                         <label htmlFor="file" className="btn btn-tertiary js-labelFile">
-                            <i className="icon fa fa-check" />
+                            <FontAwesomeIcon icon={faUpload} />
                             <span className="js-fileName">Choose a file</span>
                         </label>
                         <p className='text-danger'>{formik.errors.gameImage}</p>

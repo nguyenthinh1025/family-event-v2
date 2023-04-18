@@ -25,7 +25,11 @@ export default function EditProduct (props) {
     const validation = Yup.object({
         decorationProductName: Yup.string()
             .required("Không bỏ trống!"),
-        productQuantity: Yup.string()
+        productPrice: Yup.number()
+            .min(1, "Giá tiền không bé hơn 1")
+            .required("Không bỏ trống!"),
+        productQuantity: Yup.number()
+            .min(1, "Số Lượng không bé hơn 1")
             .required("Không bỏ trống!"),
         productDetails: Yup.string()
             .required("Không bỏ trống!"),
@@ -83,7 +87,8 @@ export default function EditProduct (props) {
         <div classname="app-main__inner  pt-2" style={{ width: '100%', margin: '0 auto', paddingTop: '50px', paddingBottom: '50px' }}>
             <div className='container pl-5 pb-5'>
                 <div className=' d-flex justify-content-between'>
-                    <div className='' style={{ fontSize: '25px' }}><NavLink to='/food'>Dụng Cụ</NavLink> / <span>Chỉnh sửa dụng cụ</span> / <span style={{ color: 'red' }}>{productID.decorationProductName}</span> </div>
+                    {/* <div className='' style={{ fontSize: '25px' }}><NavLink to='/food'>Dụng Cụ</NavLink> / <span>Chỉnh sửa dụng cụ</span> / <span style={{ color: 'red' }}>{productID.decorationProductName}</span> </div> */}
+                    <div className='d-flex justify-content-between align-items-center' style={{ fontSize: '25px' }}><NavLink to='/product' style={{ marginRight: '10px' }}>Dụng cu</NavLink> / <span style={{ marginLeft: '10px', marginRight: '10px', paddingTop: '2px', fontSize: '25px' }}>Chỉnh sửa dụng cụ</span> / <span style={{ color: 'red', marginLeft: '10px', paddingTop: '2px', fontSize: '25px' }}>{productID.decorationProductName}</span></div>
 
                 </div>
             </div>
@@ -128,7 +133,7 @@ export default function EditProduct (props) {
                     </div>
                     <div className="form-group">
                         <label className="control-label col-xs-3" htmlFor="postalAddress">Hình Ảnh:</label>
-                        <div>
+                        <div className='mb-3'>
                             <img src={formik.values.productImage} width={300} height={300} />
                         </div>
                         <input type="file" name="productImage" id="file" className="input-file" onChange={uploadFile} />
@@ -145,8 +150,7 @@ export default function EditProduct (props) {
                     <br />
                     <div className="form-group">
                         <div className="col-xs-offset-3 col-xs-9">
-                            <input type="submit" className="btn btn-primary" defaultValue="Submit" />
-                            <input type="reset" className="btn btn-default" defaultValue="Reset" />
+                            <input type="submit" className="btn btn-primary" defaultValue="Submit" value="Chỉnh Sửa" />
                         </div>
                     </div>
                 </form>
